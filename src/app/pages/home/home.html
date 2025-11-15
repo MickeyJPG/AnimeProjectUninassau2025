@@ -1,0 +1,86 @@
+<div class="min-h-screen bg-linear-to-br from-gray-900 via-gray-800 to-gray-900">
+    <!-- Header -->
+    <header class="w-full flex bg-gray-900/50 backdrop-blur-sm border-b border-gray-700 sticky top-0 z-10">
+        <div class="flex gap-4 sm:gap-0 sm:flex-row flex-col justify-between items-center container mx-auto py-6">
+            <h1 class="text-4xl font-bold text-white text-center cursor-default">
+                🎬 TMAP
+            </h1>
+
+            <!-- Barra de Busca -->
+            <div class="ml-4 flex gap-2 ">
+                <input type="text" [(ngModel)]="searchTerm" (keyup.enter)="searchMovies()"
+                    placeholder="Buscar filmes..."
+                    class="md:w-[400px] flex-1 px-4 py-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                
+                    <!-- <div class="flex gap-2 justify-around"> -->
+                    <button (click)="searchMovies()"
+                        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors cursor-pointer">
+                        Buscar
+                    </button>
+                    <button (click)="loadPopularMovies()"
+                        class="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors cursor-pointer">
+                        Limpar
+                    </button>
+                <!-- </div> -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- REQUISITO 6: Diretiva estrutural @if - Mostra loading -->
+        @if (isLoading) {
+        <div class="flex justify-center items-center py-20">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+        </div>
+        }
+
+        <!-- REQUISITO 6: Diretiva estrutural @if - Mostra erro -->
+        @if (errorMessage) {
+        <div class="bg-red-900/50 border border-red-700 text-red-200 px-6 py-4 rounded-lg mb-6">
+            {{ errorMessage }}
+        </div>
+        }
+
+        <!-- REQUISITO 6: Diretiva estrutural @for - Lista filmes -->
+        @if (!isLoading && movies.length > 0) {
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            @for (movie of movies; track movie.id) {
+            <div (click)="viewDetails(movie.id)"
+                class="group bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 cursor-pointer">
+                <!-- Poster do Filme - REQUISITO 4: Pipe Personalizado -->
+                <div class="relative overflow-hidden">
+                    <img [src]="movie.poster_path | posterUrl" [alt]="movie.title"
+                        class="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-300" />
+                    <!-- Badge de Avaliação - REQUISITO 6: Diretiva Personalizada -->
+                    <div class="absolute top-3 right-3" [appHighlightRating]="movie.vote_average">
+                        ⭐ {{ movie.vote_average.toFixed(1) }}
+                    </div>
+                </div>
+
+                <!-- Informações -->
+                <div class="p-4">
+                    <h3 class="text-white font-bold text-lg mb-2 line-clamp-1">
+                        {{ movie.title }}
+                    </h3>
+                    <!-- REQUISITO 4: Pipe Built-in (date) -->
+                    <p class="text-gray-400 text-sm mb-2">
+                        📅 {{ movie.release_date | date:'dd/MM/yyyy' }}
+                    </p>
+                    <p class="text-gray-300 text-sm line-clamp-2">
+                        {{ movie.overview || 'Sem descrição disponível' }}
+                    </p>
+                </div>
+            </div>
+            }
+        </div>
+        }
+
+        <!-- REQUISITO 6: Diretiva estrutural @if - Nenhum resultado -->
+        @if (!isLoading && movies.length === 0 && !errorMessage) {
+        <div class="text-center py-20">
+            <p class="text-gray-400 text-xl">Nenhum filme encontrado</p>
+        </div>
+        }
+    </main>
+</div>
