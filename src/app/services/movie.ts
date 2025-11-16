@@ -29,7 +29,7 @@ export class MovieService {
   // REQUISITO 3: Método GET - Busca filmes por termo
   searchMovies(query: string, page: number = 1): Observable<MovieResponse> {
     return this.http.get<MovieResponse>(
-      `${this.baseUrl}/anime/q=${query}&page=${page}`
+      `${this.baseUrl}/anime?q=${query}&page=${page}`
     );
   }
 }
