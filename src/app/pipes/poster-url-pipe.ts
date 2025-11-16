@@ -14,7 +14,12 @@ export class PosterUrlPipe implements PipeTransform {
     if (!posterPath) {
       return this.placeholderImage;
     }
-    // Retorna URL completa do poster
+    // Se `posterPath` já for uma URL completa (Jikan API fornece `images.jpg.large_image_url`), retorna direto
+    if (/^https?:\/\//i.test(posterPath)) {
+      return posterPath;
+    }
+
+    // Caso contrário, assume caminho relativo no estilo TMDB e concatena
     return `${this.baseImageUrl}${posterPath}`;
   }
 }

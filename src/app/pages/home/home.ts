@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('[HomeComponent] ngOnInit');
     this.loadPopularMovies();
   }
 
@@ -38,16 +39,18 @@ export class HomeComponent implements OnInit {
   loadPopularMovies() {
     this.isLoading = true;
     this.errorMessage = '';
-    
+    console.log('[HomeComponent] loadPopularMovies -> calling service');
+
     this.movieService.getPopularMovies().subscribe({
       next: (response) => {
+        console.log('[HomeComponent] loadPopularMovies response', { results: response.results?.length });
         this.movies = response.results;
         this.isLoading = false;
       },
       error: (error) => {
         this.errorMessage = 'Erro ao carregar filmes. Tente novamente.';
         this.isLoading = false;
-        console.error('Erro:', error);
+        console.error('[HomeComponent] loadPopularMovies error', error);
       }
     });
   }
@@ -55,6 +58,7 @@ export class HomeComponent implements OnInit {
   // Busca filmes por termo
   searchMovies() {
     if (this.searchTerm.trim() === '') {
+      console.log('[HomeComponent] searchMovies empty term - loading popular');
       this.loadPopularMovies();
       return;
     }
@@ -62,21 +66,25 @@ export class HomeComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = '';
 
+    console.log('[HomeComponent] searchMovies -> calling service', { term: this.searchTerm });
+
     this.movieService.searchMovies(this.searchTerm).subscribe({
       next: (response) => {
+        console.log('[HomeComponent] searchMovies response', { term: this.searchTerm, results: response.results?.length });
         this.movies = response.results;
         this.isLoading = false;
       },
       error: (error) => {
         this.errorMessage = 'Erro na busca. Tente novamente.';
         this.isLoading = false;
-        console.error('Erro:', error);
+        console.error('[HomeComponent] searchMovies error', error);
       }
     });
   }
 
   // REQUISITO 7: Navega passando ID por parâmetro
   viewDetails(movieId: number) {
+    console.log('[HomeComponent] viewDetails', { movieId });
     this.router.navigate(['/movie', movieId]);
   }
 }

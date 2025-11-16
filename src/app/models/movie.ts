@@ -3,9 +3,9 @@ export interface Movie {
   mal_id: number;
   title_english: string;
   synopsis: string;
-  poster_path: string;
+  images: any;
   backdrop_path: string;
-  year: string;
+  aired: any;
   score: number;
   scored_by: number;
   popularity: number;

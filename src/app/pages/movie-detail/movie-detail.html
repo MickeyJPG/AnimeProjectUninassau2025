@@ -46,7 +46,7 @@
           <!-- Poster -->
           <div class="lg:col-span-1">
             <img
-              [src]="movie.poster_path | posterUrl"
+              [src]="movie.images.jpg.large_image_url | posterUrl"
               [alt]="movie.title_english"
               class="w-full rounded-lg shadow-2xl"
             />
@@ -72,7 +72,7 @@
                 [appHighlightRating]="movie.score"
                 class="text-lg"
               >
-                ⭐ {{ movie.score.toFixed(1) }}/10
+                ⭐ {{ movie.score != null ? (movie.score | number:'1.1-1') + '/10' : '??' }}
               </span>
               
               <span class="px-4 py-2 bg-gray-800/80 backdrop-blur-sm text-white rounded-lg">
@@ -81,7 +81,7 @@
 
               <!-- REQUISITO 4: Pipe Built-in (date) -->
               <span class="px-4 py-2 bg-gray-800/80 backdrop-blur-sm text-white rounded-lg">
-                📅 {{ movie.year }}
+                📅 {{ movie.aired.string }}
               </span>
 
               @if (movie.runtime) {
@@ -118,14 +118,14 @@
               <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 text-center">
                 <p class="text-gray-400 text-sm mb-1">Popularidade</p>
                 <p class="text-white text-2xl font-bold">
-                  {{ movie.popularity.toFixed(0) }}
+                  {{ movie.popularity != null ? (movie.popularity | number:'1.0-0') : '??' }}
                 </p>
               </div>
               
               <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-4 text-center">
                 <p class="text-gray-400 text-sm mb-1">Média de Votos</p>
                 <p class="text-white text-2xl font-bold">
-                  {{ movie.score.toFixed(1) }}
+                  {{ movie.score != null ? (movie.score | number:'1.1-1') : '??' }}
                 </p>
               </div>
               

@@ -31,6 +31,7 @@ export class MovieDetailComponent implements OnInit {
   ngOnInit() {
     // REQUISITO 7: Recebe ID por parâmetro da rota
     const movieId = this.route.snapshot.paramMap.get('id');
+    console.log('[MovieDetailComponent] ngOnInit, route param id =', movieId);
     
     if (movieId) {
       this.loadMovieDetails(+movieId);
@@ -41,15 +42,18 @@ export class MovieDetailComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = '';
 
+    console.log('[MovieDetailComponent] loadMovieDetails calling service', { id });
+
     this.movieService.getMovieDetails(id).subscribe({
       next: (movie) => {
+        console.log('[MovieDetailComponent] loadMovieDetails response', { id, movie });
         this.movie = movie;
         this.isLoading = false;
       },
       error: (error) => {
         this.errorMessage = 'Erro ao carregar detalhes do filme.';
         this.isLoading = false;
-        console.error('Erro:', error);
+        console.error('[MovieDetailComponent] loadMovieDetails error', { id, error });
       }
     });
   }
