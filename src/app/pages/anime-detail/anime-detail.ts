@@ -17,7 +17,7 @@ import { HighlightRatingDirective } from '../../directives/highlight-rating';
   templateUrl: './anime-detail.html',
   styleUrl: './anime-detail.css'
 })
-export class MovieDetailComponent implements OnInit {
+export class AnimeDetailComponent implements OnInit {
   anime: Anime | null = null;
   isLoading: boolean = false;
   errorMessage: string = '';
@@ -31,7 +31,7 @@ export class MovieDetailComponent implements OnInit {
   ngOnInit() {
     // REQUISITO 7: Recebe ID por parâmetro da rota
     const animeId = this.route.snapshot.paramMap.get('id');
-    console.log('[MovieDetailComponent] ngOnInit, route param id =', animeId);
+    console.log('[AnimeDetailComponent] ngOnInit, route param id =', animeId);
     
     if (animeId) {
       this.loadAnimeDetails(+animeId);
@@ -42,18 +42,18 @@ export class MovieDetailComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = '';
 
-    console.log('[MovieDetailComponent] loadAnimeDetails calling service', { id });
+    console.log('[AnimeDetailComponent] loadAnimeDetails calling service', { id });
 
     this.animeService.getAnimeDetails(id).subscribe({
       next: (anime) => {
-        console.log('[MovieDetailComponent] loadAnimeDetails response', { id, anime });
+        console.log('[AnimeDetailComponent] loadAnimeDetails response', { id, anime });
         this.anime = anime;
         this.isLoading = false;
       },
       error: (error) => {
         this.errorMessage = 'Erro ao carregar detalhes do filme.';
         this.isLoading = false;
-        console.error('[MovieDetailComponent] loadAnimeDetails error', { id, error });
+        console.error('[AnimeDetailComponent] loadAnimeDetails error', { id, error });
       }
     });
   }
