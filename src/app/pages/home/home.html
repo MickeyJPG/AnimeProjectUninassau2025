@@ -43,32 +43,32 @@
         }
 
         <!-- REQUISITO 6: Diretiva estrutural @for - Lista filmes -->
-        @if (!isLoading && movies.length > 0) {
+        @if (!isLoading) {
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-            @for (movie of movies; track movie.id) {
-            <div (click)="viewDetails(movie.id)"
+            @for (movie of movies; track movie.mal_id) {
+            <div (click)="viewDetails(movie.mal_id)"
                 class="group bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 cursor-pointer">
                 <!-- Poster do Filme - REQUISITO 4: Pipe Personalizado -->
                 <div class="relative overflow-hidden">
-                    <img [src]="movie.poster_path | posterUrl" [alt]="movie.title"
+                    <img [src]="movie.poster_path | posterUrl" [alt]="movie.title_english"
                         class="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-300" />
                     <!-- Badge de Avaliação - REQUISITO 6: Diretiva Personalizada -->
-                    <div class="absolute top-3 right-3" [appHighlightRating]="movie.vote_average">
-                        ⭐ {{ movie.vote_average.toFixed(1) }}
+                    <div class="absolute top-3 right-3" [appHighlightRating]="movie.score">
+                        ⭐ {{ movie.score.toFixed(1) }}
                     </div>
                 </div>
 
                 <!-- Informações -->
                 <div class="p-4">
                     <h3 class="text-white font-bold text-lg mb-2 line-clamp-1">
-                        {{ movie.title }}
+                        {{ movie.title_english }}
                     </h3>
                     <!-- REQUISITO 4: Pipe Built-in (date) -->
                     <p class="text-gray-400 text-sm mb-2">
-                        📅 {{ movie.release_date | date:'dd/MM/yyyy' }}
+                        📅 {{ movie.year }}
                     </p>
                     <p class="text-gray-300 text-sm line-clamp-2">
-                        {{ movie.overview || 'Sem descrição disponível' }}
+                        {{ movie.synopsis || 'Sem descrição disponível' }}
                     </p>
                 </div>
             </div>
@@ -77,7 +77,7 @@
         }
 
         <!-- REQUISITO 6: Diretiva estrutural @if - Nenhum resultado -->
-        @if (!isLoading && movies.length === 0 && !errorMessage) {
+        @if (!isLoading && !errorMessage) {
         <div class="text-center py-20">
             <p class="text-gray-400 text-xl">Nenhum filme encontrado</p>
         </div>

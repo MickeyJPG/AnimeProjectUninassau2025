@@ -19,7 +19,7 @@ export class MovieService {
       `${this.baseUrl}/top/anime?page=${page}`
     );
   }
-
+  
     getMovieDetails(id: number): Observable<Movie> {
     return this.http.get<Movie>(
       `${this.baseUrl}/anime/${id}`

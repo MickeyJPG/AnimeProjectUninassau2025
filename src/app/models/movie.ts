@@ -1,13 +1,13 @@
 // Interface para tipar os dados da API TMDB
 export interface Movie {
-  id: number;
-  title: string;
-  overview: string;
+  mal_id: number;
+  title_english: string;
+  synopsis: string;
   poster_path: string;
   backdrop_path: string;
-  release_date: string;
-  vote_average: number;
-  vote_count: number;
+  year: string;
+  score: number;
+  scored_by: number;
   popularity: number;
   genre_ids?: number[];
   genres?: Genre[];
