@@ -21,8 +21,8 @@ export class MovieService {
   }
 
   getMovieDetails(id: number): Observable<Movie> {
-  return this.http.get<Movie>(
-    `${this.baseUrl}/anime?mal_id=${id}`
+    return this.http.get<Movie>(
+      `${this.baseUrl}/anime?mal_id=${id}`
     );
   }
 
