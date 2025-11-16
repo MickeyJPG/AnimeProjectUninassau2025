@@ -8,16 +8,16 @@
 
             <!-- Barra de Busca -->
             <div class="ml-4 flex gap-2 ">
-                <input type="text" [(ngModel)]="searchTerm" (keyup.enter)="searchMovies()"
-                    placeholder="Buscar filmes..."
+                <input type="text" [(ngModel)]="searchTerm" (keyup.enter)="searchAnimes()"
+                    placeholder="Buscar animes..."
                     class="md:w-[400px] flex-1 px-4 py-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
                 
                     <!-- <div class="flex gap-2 justify-around"> -->
-                    <button (click)="searchMovies()"
+                    <button (click)="searchAnimes()"
                         class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors cursor-pointer">
                         Buscar
                     </button>
-                    <button (click)="loadPopularMovies()"
+                    <button (click)="loadPopularAnimes()"
                         class="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors cursor-pointer">
                         Limpar
                     </button>
@@ -42,33 +42,33 @@
         </div>
         }
 
-        <!-- REQUISITO 6: Diretiva estrutural @for - Lista filmes -->
+        <!-- REQUISITO 6: Diretiva estrutural @for - Lista animes -->
         @if (!isLoading) {
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-            @for (movie of movies; track movie.mal_id) {
-            <div (click)="viewDetails(movie.mal_id)"
+            @for (anime of animes; track anime.mal_id) {
+            <div (click)="viewDetails(anime.mal_id)"
                 class="group bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 cursor-pointer">
                 <!-- Poster do Filme - REQUISITO 4: Pipe Personalizado -->
                 <div class="relative overflow-hidden">
-                    <img [src]="movie.images.jpg.large_image_url | posterUrl" [alt]="movie.title_english"
+                    <img [src]="anime.images.jpg.large_image_url | posterUrl" [alt]="anime.title_english"
                         class="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-300" />
                     <!-- Badge de Avaliação - REQUISITO 6: Diretiva Personalizada -->
-                    <div class="absolute top-3 right-3" [appHighlightRating]="movie.score">
-                        ⭐ {{ movie.score != null ? (movie.score | number:'1.1-1') : '??' }}
+                    <div class="absolute top-3 right-3" [appHighlightRating]="anime.score">
+                        ⭐ {{ anime.score != null ? (anime.score | number:'1.1-1') : '??' }}
                     </div>
                 </div>
 
                 <!-- Informações -->
                 <div class="p-4">
                     <h3 class="text-white font-bold text-lg mb-2 line-clamp-1">
-                        {{ movie.title_english }}
+                        {{ anime.title_english }}
                     </h3>
                     <!-- REQUISITO 4: Pipe Built-in (date) -->
                     <p class="text-gray-400 text-sm mb-2">
-                        📅 {{ movie.aired.string }}
+                        📅 {{ anime.aired.string }}
                     </p>
                     <p class="text-gray-300 text-sm line-clamp-2">
-                        {{ movie.synopsis || 'Sem descrição disponível' }}
+                        {{ anime.synopsis || 'Sem descrição disponível' }}
                     </p>
                 </div>
             </div>
