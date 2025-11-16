@@ -16,13 +16,13 @@ export class MovieService {
   // REQUISITO 3: Método GET - Busca filmes populares
   getPopularMovies(page: number = 1): Observable<MovieResponse> {
     return this.http.get<MovieResponse>(
-      `${this.baseUrl}/top/anime?page=${page}`
+      `${this.baseUrl}/top/anime?page=${page}&sfw`
     );
   }
-  
-    getMovieDetails(id: number): Observable<Movie> {
-    return this.http.get<Movie>(
-      `${this.baseUrl}/anime/${id}`
+
+  getMovieDetails(id: number): Observable<Movie> {
+  return this.http.get<Movie>(
+    `${this.baseUrl}/anime?mal_id=${id}`
     );
   }
 
