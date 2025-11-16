@@ -11,7 +11,7 @@ export interface Anime {
   popularity: number;
   genre_ids?: number[];
   genres?: Genre[];
-  runtime?: number;
+  duration?: number;
   tagline?: string;
 }
 
