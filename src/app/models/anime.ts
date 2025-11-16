@@ -9,9 +9,9 @@ export interface Anime {
   score: number;
   scored_by: number;
   popularity: number;
+  duration?: number;
   genre_ids?: number[];
   genres?: Genre[];
-  duration?: number;
   tagline?: string;
 }
 
