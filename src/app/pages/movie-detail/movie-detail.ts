@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MovieService } from '../../services/movie';
-import { Movie } from '../../models/movie';
+import { AnimeService } from '../../services/movie';
+import { Anime } from '../../models/movie';
 import { PosterUrlPipe } from '../../pipes/poster-url-pipe';
 import { HighlightRatingDirective } from '../../directives/highlight-rating';
 
@@ -18,42 +18,42 @@ import { HighlightRatingDirective } from '../../directives/highlight-rating';
   styleUrl: './movie-detail.css'
 })
 export class MovieDetailComponent implements OnInit {
-  movie: Movie | null = null;
+  anime: Anime | null = null;
   isLoading: boolean = false;
   errorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private movieService: MovieService
+    private animeService: AnimeService
   ) {}
 
   ngOnInit() {
     // REQUISITO 7: Recebe ID por parâmetro da rota
-    const movieId = this.route.snapshot.paramMap.get('id');
-    console.log('[MovieDetailComponent] ngOnInit, route param id =', movieId);
+    const animeId = this.route.snapshot.paramMap.get('id');
+    console.log('[MovieDetailComponent] ngOnInit, route param id =', animeId);
     
-    if (movieId) {
-      this.loadMovieDetails(+movieId);
+    if (animeId) {
+      this.loadAnimeDetails(+animeId);
     }
   }
 
-  loadMovieDetails(id: number) {
+  loadAnimeDetails(id: number) {
     this.isLoading = true;
     this.errorMessage = '';
 
-    console.log('[MovieDetailComponent] loadMovieDetails calling service', { id });
+    console.log('[MovieDetailComponent] loadAnimeDetails calling service', { id });
 
-    this.movieService.getMovieDetails(id).subscribe({
-      next: (movie) => {
-        console.log('[MovieDetailComponent] loadMovieDetails response', { id, movie });
-        this.movie = movie;
+    this.animeService.getAnimeDetails(id).subscribe({
+      next: (anime) => {
+        console.log('[MovieDetailComponent] loadAnimeDetails response', { id, anime });
+        this.anime = anime;
         this.isLoading = false;
       },
       error: (error) => {
         this.errorMessage = 'Erro ao carregar detalhes do filme.';
         this.isLoading = false;
-        console.error('[MovieDetailComponent] loadMovieDetails error', { id, error });
+        console.error('[MovieDetailComponent] loadAnimeDetails error', { id, error });
       }
     });
   }
