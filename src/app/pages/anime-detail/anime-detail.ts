@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AnimeService } from '../../services/movie';
-import { Anime } from '../../models/movie';
+import { AnimeService } from '../../services/anime';
+import { Anime } from '../../models/anime';
 import { PosterUrlPipe } from '../../pipes/poster-url-pipe';
 import { HighlightRatingDirective } from '../../directives/highlight-rating';
 
 @Component({
-  selector: 'app-movie-detail',
+  selector: 'app-anime-detail',
   standalone: true,
   imports: [
     CommonModule, 
     PosterUrlPipe,
     HighlightRatingDirective
   ],
-  templateUrl: './movie-detail.html',
-  styleUrl: './movie-detail.css'
+  templateUrl: './anime-detail.html',
+  styleUrl: './anime-detail.css'
 })
 export class MovieDetailComponent implements OnInit {
   anime: Anime | null = null;

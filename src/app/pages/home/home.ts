@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AnimeService } from '../../services/movie';
-import { Anime } from '../../models/movie';
+import { AnimeService } from '../../services/anime';
+import { Anime } from '../../models/anime';
 import { PosterUrlPipe } from '../../pipes/poster-url-pipe';
 import { HighlightRatingDirective } from '../../directives/highlight-rating';
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
-import { Anime, AnimeResponse } from '../models/movie';
+import { Anime, AnimeResponse } from '../models/anime';
 
 // REQUISITO 5: Service para alocar HttpClient
 @Injectable({

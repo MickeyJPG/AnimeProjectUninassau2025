@@ -1,7 +1,7 @@
 
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home';
-import { MovieDetailComponent } from './pages/movie-detail/movie-detail';
+import { MovieDetailComponent } from './pages/anime-detail/anime-detail';
 
 // REQUISITO 1: Mínimo 2 páginas
 // REQUISITO 7: Rota com parâmetro (:id)
