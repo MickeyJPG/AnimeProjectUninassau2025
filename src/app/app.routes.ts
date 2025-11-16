@@ -7,6 +7,6 @@ import { AnimeDetailComponent } from './pages/anime-detail/anime-detail';
 // REQUISITO 7: Rota com parâmetro (:id)
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'movie/:id', component: AnimeDetailComponent }, // Passa ID por rota
+  { path: 'anime/:id', component: AnimeDetailComponent }, // Passa ID por rota
   { path: '**', redirectTo: '' }
 ];

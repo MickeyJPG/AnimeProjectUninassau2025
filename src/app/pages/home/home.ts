@@ -85,6 +85,6 @@ export class HomeComponent implements OnInit {
   // REQUISITO 7: Navega passando ID por parâmetro
   viewDetails(animeId: number) {
     console.log('[HomeComponent] viewDetails', { animeId });
-    this.router.navigate(['/movie', animeId]);
+    this.router.navigate(['/anime', animeId]);
   }
 }
