@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MovieService } from '../../services/movie';
-import { Movie } from '../../models/movie';
+import { AnimeService } from '../../services/movie';
+import { Anime } from '../../models/movie';
 import { PosterUrlPipe } from '../../pipes/poster-url-pipe';
 import { HighlightRatingDirective } from '../../directives/highlight-rating';
 
@@ -20,71 +20,71 @@ import { HighlightRatingDirective } from '../../directives/highlight-rating';
   styleUrl: './home.css'
 })
 export class HomeComponent implements OnInit {
-  movies: Movie[] = [];
+  animes: Anime[] = [];
   searchTerm: string = '';
   isLoading: boolean = false;
   errorMessage: string = '';
 
   constructor(
-    private movieService: MovieService,
+    private animeService: AnimeService,
     private router: Router
   ) {}
 
   ngOnInit() {
     console.log('[HomeComponent] ngOnInit');
-    this.loadPopularMovies();
+    this.loadPopularAnimes();
   }
 
-  // Carrega filmes populares na inicialização
-  loadPopularMovies() {
+  // Carrega animes populares na inicialização
+  loadPopularAnimes() {
     this.isLoading = true;
     this.errorMessage = '';
-    console.log('[HomeComponent] loadPopularMovies -> calling service');
+    console.log('[HomeComponent] loadPopularAnimes -> calling service');
 
-    this.movieService.getPopularMovies().subscribe({
+    this.animeService.getPopularAnimes().subscribe({
       next: (response) => {
-        console.log('[HomeComponent] loadPopularMovies response', { results: response.results?.length });
-        this.movies = response.results;
+        console.log('[HomeComponent] loadPopularAnimes response', { results: response.results?.length });
+        this.animes = response.results;
         this.isLoading = false;
       },
       error: (error) => {
-        this.errorMessage = 'Erro ao carregar filmes. Tente novamente.';
+        this.errorMessage = 'Erro ao carregar animes. Tente novamente.';
         this.isLoading = false;
-        console.error('[HomeComponent] loadPopularMovies error', error);
+        console.error('[HomeComponent] loadPopularAnimes error', error);
       }
     });
   }
 
-  // Busca filmes por termo
-  searchMovies() {
+  // Busca animes por termo
+  searchAnimes() {
     if (this.searchTerm.trim() === '') {
-      console.log('[HomeComponent] searchMovies empty term - loading popular');
-      this.loadPopularMovies();
+      console.log('[HomeComponent] searchAnimes empty term - loading popular');
+      this.loadPopularAnimes();
       return;
     }
 
     this.isLoading = true;
     this.errorMessage = '';
 
-    console.log('[HomeComponent] searchMovies -> calling service', { term: this.searchTerm });
+    console.log('[HomeComponent] searchAnimes -> calling service', { term: this.searchTerm });
 
-    this.movieService.searchMovies(this.searchTerm).subscribe({
+    this.animeService.searchAnimes(this.searchTerm).subscribe({
       next: (response) => {
-        console.log('[HomeComponent] searchMovies response', { term: this.searchTerm, results: response.results?.length });
-        this.movies = response.results;
+        console.log('[HomeComponent] searchAnimes response', { term: this.searchTerm, results: response.results?.length });
+        this.animes = response.results;
         this.isLoading = false;
       },
       error: (error) => {
         this.errorMessage = 'Erro na busca. Tente novamente.';
         this.isLoading = false;
-        console.error('[HomeComponent] searchMovies error', error);
+        console.error('[HomeComponent] searchAnimes error', error);
       }
     });
   }
 
   // REQUISITO 7: Navega passando ID por parâmetro
-  viewDetails(movieId: number) {
-    console.log('[HomeComponent] viewDetails', { movieId });
-    this.router.navigate(['/movie', movieId]);
+  viewDetails(animeId: number) {
+    console.log('[HomeComponent] viewDetails', { animeId });
+    this.router.navigate(['/movie', animeId]);
   }
 }
