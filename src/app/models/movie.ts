@@ -1,5 +1,5 @@
-// Interface para tipar os dados da API TMDB
-export interface Movie {
+// Interface para tipar os dados da API Jikan
+export interface Anime {
   mal_id: number;
   title_english: string;
   synopsis: string;
@@ -20,7 +20,7 @@ export interface Genre {
   name: string;
 }
 
-export interface MovieResponse {
-  results: Movie[];
+export interface AnimeResponse {
+  results: Anime[];
   pagination?: any;
 }
