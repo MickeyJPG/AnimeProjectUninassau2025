@@ -13,8 +13,8 @@ import { HighlightRatingDirective } from '../../directives/highlight-rating';
   imports: [
     CommonModule, 
     FormsModule, 
-    PosterUrlPipe, // REQUISITO 4: Pipe personalizado
-    HighlightRatingDirective // REQUISITO 6: Diretiva personalizada
+    PosterUrlPipe,
+    HighlightRatingDirective
   ],
   templateUrl: './home.html',
   styleUrl: './home.css'
