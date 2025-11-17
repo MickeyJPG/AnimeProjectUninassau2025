@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "TMAP": {
+    "ANDB": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -22,6 +22,12 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              }
+            ,
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
             "styles": [
@@ -56,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "TMAP:build:production"
+              "buildTarget": "ANDB:build:production"
             },
             "development": {
-              "buildTarget": "TMAP:build:development"
+              "buildTarget": "ANDB:build:development"
             }
           },
           "defaultConfiguration": "development"
